@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Hirono Archive",
+    "slug": "hirono-archive",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#f4eee8"
+    },
+    "android": {
+      "package": "com.student.hironoarchive"
+    },
+    "ios": {
+      "bundleIdentifier": "com.student.hironoarchive"
+    }
+  }
+}

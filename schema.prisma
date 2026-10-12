@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Series {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  releaseYear Int?
+  description String   @default("")
+  figures     Figure[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Figure {
+  id          Int      @id @default(autoincrement())
+  name        String
+  rarity      String   @default("Regular")
+  description String   @default("")
+  imageUrl    String   @default("")
+  seriesId    Int
+  series      Series   @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  collection  CollectionItem[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([seriesId])
+}
+
+model CollectionItem {
+  id          Int      @id @default(autoincrement())
+  figureId    Int
+  figure      Figure   @relation(fields: [figureId], references: [id], onDelete: Cascade)
+  quantity    Int      @default(1)
+  condition   String   @default("Belum diisi")
+  notes       String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@unique([figureId])
+}
